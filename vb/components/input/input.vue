@@ -7,6 +7,8 @@
                :value="innerValue" @input="handleInput" autocomplete="off"
                @keyup="keyUp"
                @keydown="keyDown"
+               v-bind="$attrs"
+               ref="input"
                @blur="blur" @focus="$emit('focus', $event)">
         <span v-if="hasafter" class="ant-input-group-addon">
             <slot name="after"></slot>
@@ -16,12 +18,15 @@
               :disabled="disabled" :value="innerValue" @input="handleInput"
               @keyup="keyUp"
               @keydown="keyDown"
+              v-bind="$attrs"
               @blur="blur" @focus="$emit('focus', $event)" ref="textarea" :rows="autosize && autosize.minRows ?autosize.minRows:2" :style="{maxHeight: autosize && autosize.maxRows ? `${autosize.maxRows*18+10}px`:'auto'}">
     </textarea>
     <input v-else :id="id" :type="type" :class="inpClasses" :placeholder="placeholder" :disabled="disabled"
            :value="innerValue" @input="handleInput" autocomplete="off"
            @keyup="keyUp"
            @keydown="keyDown"
+           v-bind="$attrs"
+           ref="input"
            @blur="blur" @focus="$emit('focus', $event)">
 </template>
 
@@ -116,6 +121,15 @@
             });
         },
         methods: {
+            setFocus() {
+                (this.$refs.input || this.$refs.textarea).focus();
+            },
+            setBlur() {
+                (this.$refs.input || this.$refs.textarea).blur();
+            },
+            selectText() {
+                (this.$refs.input || this.$refs.textarea).select();
+            },
             handleInput(event) {
                 if (this.debounceTimer) clearTimeout(this.debounceTimer);
                 this.debounceTimer = setTimeout(() => {

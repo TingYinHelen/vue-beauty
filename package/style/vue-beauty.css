@@ -15202,6 +15202,7 @@ form .ant-input-group-addon .ant-cascader-picker:only-child {
   position: relative;
   overflow: auto;
   border-radius: 4px;
+  z-index: 0;
 }
 .ant-table-body {
   transition: opacity 0.3s ease;
@@ -20532,7 +20533,7 @@ samp {
   vertical-align: middle;
   position: relative;
   width: 180px;
-  height: 200px;
+  height: 250px;
   padding-top: 33px;
 }
 .ant-transfer-list-with-footer {
